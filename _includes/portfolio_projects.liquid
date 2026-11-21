@@ -1,0 +1,20 @@
+{% assign heading = include.heading | default: 'h3' %}
+{% assign projects = site.projects | sort: 'importance' %}
+<div class="portfolio-projects">
+  {% for project in projects %}
+    {% assign show_preview = false %}
+    {% if include.show_previews and project.demo_url %}
+      {% assign show_preview = true %}
+    {% endif %}
+    <article class="portfolio-project{% if show_preview %} portfolio-project-with-demo{% endif %}">
+      <div>
+        <p class="portfolio-meta">{{ project.context | escape }}</p>
+        <{{ heading }}><a href="{{ project.url | relative_url }}">{{ project.title | escape }}</a></{{ heading }}>
+        <p>{{ project.description | escape }}</p>
+      </div>
+      {% if show_preview %}
+        {% include portfolio_demo.liquid project=project %}
+      {% endif %}
+    </article>
+  {% endfor %}
+</div>

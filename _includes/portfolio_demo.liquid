@@ -1,0 +1,11 @@
+<div class="portfolio-demo">
+  {% if include.project.demo_video %}
+    <video controls muted loop playsinline preload="none"{% if include.project.demo_poster %} poster="{{ include.project.demo_poster | relative_url }}"{% endif %} aria-label="{{ include.project.title | escape }} robot demonstration">
+      <source src="{{ include.project.demo_video | relative_url | escape }}" type="video/mp4">
+    </video>
+  {% elsif include.project.demo_poster %}
+    <a href="{{ include.project.demo_url | escape }}">
+      <img src="{{ include.project.demo_poster | relative_url }}" alt="Watch the {{ include.project.title | escape }} robot demonstration on YouTube" loading="lazy">
+    </a>
+  {% endif %}
+</div>
